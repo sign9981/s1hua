@@ -1,4 +1,4 @@
-# s1hua - 丝滑
+# s1hua - 丝滑~
 
 > 轻量级、高兼容、易扩展的自动化子域名收集与整合工具  
 > ✨ 集成 GitHub Star 数千+ 的成熟开源工具，低配 VPS 也能流畅运行！
@@ -53,7 +53,7 @@ python3 s1hua.py --init
 python3 s1hua.py -t example.com
 
 # 多目标（从文件读取）
-python3 s1hua.py -f targets.txt
+python3 s1hua.py -T targets.txt
 
 # 查看所有选项
 python3 s1hua.py -h
@@ -63,14 +63,14 @@ python3 s1hua.py -h
 
 ## 🔧 自定义工具命令
 
-所有工具调用逻辑集中在 `core/parsing.py` 和 `core/config.py` 中。  
+所有工具调用逻辑集中在 `config.yaml` 中。  
 例如，若想为 `subfinder` 添加 `-silent` 参数：
 
-```python
-# 在 core/parsing.py 中找到类似代码
-cmd = [tool_path, "-d", domain]
+```yaml
+# 在 core/parsing.py 中找到类似配置
+command: "{{tool_path}} -dL {target_file} -o {output_file}"
 # 修改为
-cmd = [tool_path, "-d", domain, "-silent"]
+command: "{{tool_path}} -dL {target_file} -silent -o {output_file}"
 ```
 
 > 💡 因为每个工具都是独立进程调用，**修改命令行参数极其简单**，无需理解复杂框架。
